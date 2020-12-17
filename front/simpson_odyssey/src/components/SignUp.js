@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -14,7 +15,13 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    axios
+      .post("/auth/signup", form)
+      .then((response) => response.data)
+      .then(
+        (res) => setForm({ flash: res.flash }),
+        (err) => setForm({ flash: err.flash })
+      );
   };
   return (
     <div>
