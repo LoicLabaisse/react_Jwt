@@ -5,12 +5,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 
-const SignUp = () => {
+const SignIn = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
-    name: "",
-    lastname: "",
   });
   const [error, setError] = useState({
     success: "",
@@ -25,7 +23,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("/auth/signup", form)
+      .post("/auth/signin", form)
       .then((response) => response.data)
       .then(
         (res) => setError({ ...error, success: res.flash, error: "" }),
@@ -34,11 +32,11 @@ const SignUp = () => {
     setFormisSubmit(true);
   };
 
-  console.log(error);
   return (
-    <div>
+    <div className='Signin'>
       <p>
-        Vous avez déjà un compte ? <Link to='/signin'>Connectez-vous</Link>
+        Vous n'êtes pas encore inscrit ?{" "}
+        <Link to='/signup'>Inscrivez-vous</Link>
       </p>
       {formisSubmit &&
         (error.success ? (
@@ -75,21 +73,7 @@ const SignUp = () => {
           onChange={updateEmailField}
           style={{ width: "50%" }}
         />
-        <TextField
-          type='name'
-          name='name'
-          label='name'
-          onChange={updateEmailField}
-          style={{ width: "50%" }}
-        />
-        <TextField
-          type='lastname'
-          name='lastname'
-          label='lastname'
-          onChange={updateEmailField}
-          style={{ width: "50%" }}
-        />
-        <Link to='/'>
+        <Link to='/Profile'>
           <Button
             type='submit'
             style={{
@@ -107,4 +91,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

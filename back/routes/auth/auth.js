@@ -9,9 +9,9 @@ router.post("/signup", (req, res, next) => {
     [email, password, name, lastname],
     (err, result) => {
       if (err) {
-        res.status(500).send("error");
+        res.status(500).json({ flash: err.message });
       } else {
-        return res.status(200).send("AllRight");
+        return res.status(200).json({ flash: "User has been signed up!" });
       }
     }
   );
